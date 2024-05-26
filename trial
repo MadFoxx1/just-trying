@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.Date;
+
+// Transaction class to represent individual transactions
+class Transaction {
+    private Date date;
+    private String type; // Withdrawal or Deposit
+    private double amount;
+
+    // Constructor
+    public Transaction(Date date, String type, double amount) {
+        this.date = date;
+        this.type = type;
+        this.amount = amount;
+    }
+
+    // Getters
+    public Date getDate() {
+        return date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+}
+
+// BoosterClubAccount class to manage the account transactions
+class BoosterClubAccount {
+    private ArrayList<Transaction> transactions;
+
+    // Constructor
+    public BoosterClubAccount() {
+        this.transactions = new ArrayList<>();
+    }
+
+    // Method to add a transaction
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+    }
+
+    // Method to display withdrawals
+    public void displayWithdrawals() {
+        System.out.println("Withdrawals:");
+        for (Transaction transaction : transactions) {
+            if (transaction.getType().equals("Withdrawal")) {
+                System.out.println("Date: " + transaction.getDate() +
+                        ", Amount: $" + transaction.getAmount());
+            }
+        }
+    }
+
+    // Method to display deposits
+    public void displayDeposits() {
+        System.out.println("Deposits:");
+        for (Transaction transaction : transactions) {
+            if (transaction.getType().equals("Deposit")) {
+                System.out.println("Date: " + transaction.getDate() +
+                        ", Amount: $" + transaction.getAmount());
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a booster club account
+        BoosterClubAccount account = new BoosterClubAccount();
+
+        // Adding transactions
+        Transaction withdrawal1 = new Transaction(new Date(), "Withdrawal", 50.00);
+        account.addTransaction(withdrawal1);
+
+        Transaction deposit1 = new Transaction(new Date(), "Deposit", 100.00);
+        account.addTransaction(deposit1);
+
+        Transaction withdrawal2 = new Transaction(new Date(), "Withdrawal", 25.00);
+        account.addTransaction(withdrawal2);
+
+        // Scenario 1: Donation from a local business
+        Transaction donation = new Transaction(new Date(124, 4, 24), "Deposit", 1000.00);
+        account.addTransaction(donation);
+
+        // Scenario 2: Equipment purchases for soccer team
+        Transaction equipmentPurchase = new Transaction(new Date(124, 4, 24), "Withdrawal", 300.00);
+        account.addTransaction(equipmentPurchase);
+
+        // Displaying withdrawals and deposits separately
+        account.displayWithdrawals();
+        account.displayDeposits();
+    }
+}
